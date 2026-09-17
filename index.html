@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Panda Forensics — a beginner-friendly guide to FTK Imager, Volatility 3, RAM forensics, hashing, process analysis, command lines and network artifacts.">
+  <title>Panda Forensics | FTK Imager & Volatility 3</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="navbar">
+  <a class="brand" href="#home">
+    <span class="brand-panda">🐼</span>
+    <span><strong>Panda Forensics</strong><small>Calm minds. Deeper insights.</small></span>
+  </a>
+  <nav>
+    <a href="#basics">Basics</a>
+    <a href="#workflow">Workflow</a>
+    <a href="#commands">Commands</a>
+    <a href="#processes">Processes</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+  <a class="github" href="https://github.com/SkyDevLab/FtkImagerAndVolatility" target="_blank" rel="noreferrer">★ GitHub</a>
+</header>
+
+<main>
+<section id="home" class="hero">
+  <div class="hero-copy">
+    <div class="pill">🎋 Digital Forensics • Volatility 3</div>
+    <h1>Memory forensics,<br><span>without the bamboo maze.</span></h1>
+    <p>Understand what FTK Imager captures, why RAM matters, and how Volatility turns a memory dump into useful forensic evidence.</p>
+    <div class="hero-actions"><a class="btn primary" href="#basics">🐼 Start learning</a><a class="btn secondary" href="#workflow">See the workflow →</a></div>
+    <div class="scribble">Small steps → big answers.</div>
+  </div>
+  <div class="hero-art">
+    <img src="https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?auto=format&fit=crop&w=900&q=85" alt="Panda in bamboo" />
+    <div class="leaf">🎋</div>
+    <div class="speech">RAM remembers.<br>Let's investigate. 🔎</div>
+  </div>
+</section>
+
+<section class="quick-grid">
+  <a href="#basics"><b>🔎 What?</b><span>RAM forensics</span></a>
+  <a href="#basics"><b>💡 Why?</b><span>Why memory matters</span></a>
+  <a href="#workflow"><b>🧭 How?</b><span>Acquisition → analysis</span></a>
+  <a href="#commands"><b>🧩 Plugins</b><span>Volatility commands</span></a>
+  <a href="#processes"><b>🕵️ Processes</b><span>pslist vs psscan</span></a>
+  <a href="#faq"><b>❓ FAQ</b><span>Common questions</span></a>
+</section>
+
+<section id="basics" class="section">
+  <div class="section-head"><span>THE BASICS</span><h2>First, understand the big picture</h2><p>Two tools, two jobs.</p></div>
+  <div class="cards two">
+    <article class="card">
+      <div class="icon">💾</div><h3>FTK Imager</h3>
+      <p>In this lab, FTK Imager is used to acquire physical memory and create the RAM evidence file.</p>
+      <ul><li>Capture RAM</li><li>Create a memory image</li><li>Support evidence preservation</li><li>Calculate or document hashes</li></ul>
+      <div class="callout">🐼 Think of FTK Imager as the camera. It captures a snapshot of RAM.</div>
+    </article>
+    <article class="card">
+      <div class="icon">🧠</div><h3>Volatility 3</h3>
+      <p>Volatility analyzes the memory image and reconstructs useful operating-system information.</p>
+      <ul><li>System and kernel information</li><li>Processes and process trees</li><li>Command-line arguments</li><li>Network artifacts</li></ul>
+      <div class="callout">🎋 Think of Volatility as the detective. It examines the snapshot.</div>
+    </article>
+  </div>
+</section>
+
+<section class="green-section">
+  <div class="section-head"><span>WHY EXAMINE RAM?</span><h2>Memory can show the system's state at capture time</h2><p>RAM can contain information that is useful for reconstructing what was happening while the machine was running.</p></div>
+  <div class="cards four">
+    <article class="mini"><b>⚙️</b><h3>Processes</h3><p>What programs were active?</p></article>
+    <article class="mini"><b>⌨️</b><h3>Command lines</h3><p>What arguments were associated with processes?</p></article>
+    <article class="mini"><b>🌐</b><h3>Network artifacts</h3><p>What sockets or connections are represented?</p></article>
+    <article class="mini"><b>🕵️</b><h3>Process artifacts</h3><p>Are there process structures outside the active list?</p></article>
+  </div>
+</section>
+
+<section id="workflow" class="section">
+  <div class="section-head"><span>THE WORKFLOW</span><h2>Acquire → verify → analyze → report</h2></div>
+  <div class="timeline">
+    <div><span>01</span><article><h3>Capture memory</h3><p>Use FTK Imager's memory capture function to create the evidence image.</p></article></div>
+    <div><span>02</span><article><h3>Hash the evidence</h3><p>Record a SHA-256 fingerprint for integrity checks.</p></article></div>
+    <div><span>03</span><article><h3>Load the image</h3><p>Give the memory image to Volatility 3.</p></article></div>
+    <div><span>04</span><article><h3>Establish context</h3><p>Run <code>windows.info</code> to identify important Windows memory context.</p></article></div>
+    <div><span>05</span><article><h3>Investigate</h3><p>Use process, command-line and network plugins to answer the forensic questions.</p></article></div>
+    <div><span>06</span><article><h3>Report</h3><p>Record actual evidence, interpretations and any limitations.</p></article></div>
+  </div>
+</section>
+
+<section class="section soft">
+  <div class="section-head"><span>EVIDENCE INTEGRITY</span><h2>SHA-256 is a fingerprint, not encryption</h2><p>The same file contents produce the same SHA-256 hash.</p></div>
+  <div class="hash-flow"><div class="hash-box">memdump.mem</div><b>→</b><div class="hash-box dark">SHA-256</div><b>→</b><div class="hash-box">64-hex-character fingerprint</div></div>
+  <div class="code-panel light"><div class="code-top">PowerShell<button onclick="copyCode('hash-code', this)">Copy</button></div><pre id="hash-code">Get-FileHash "memdump.mem" -Algorithm SHA256</pre></div>
+  <div class="note"><strong>Why re-verify?</strong><p>Hash the same evidence file again later and compare it with the recorded baseline. A match indicates the file contents were unchanged between those checks.</p></div>
+</section>
+
+<section id="commands" class="dark-section">
+  <div class="section-head light"><span>VOLATILITY 3</span><h2>Commands you'll actually use</h2><p>Replace the example filename/path with your actual memory image.</p></div>
+  <div class="command-grid">
+    <article class="command"><h3><span>01</span>windows.info</h3><p>System/kernel context. A useful first validation step.</p><pre id="c1">vol -f "memdump.mem" windows.info</pre><button onclick="copyCode('c1', this)">Copy</button></article>
+    <article class="command"><h3><span>02</span>windows.pslist</h3><p>Lists processes from the active Windows process structures.</p><pre id="c2">vol -f "memdump.mem" windows.pslist</pre><button onclick="copyCode('c2', this)">Copy</button></article>
+    <article class="command"><h3><span>03</span>windows.pstree</h3><p>Shows parent-child process relationships.</p><pre id="c3">vol -f "memdump.mem" windows.pstree</pre><button onclick="copyCode('c3', this)">Copy</button></article>
+    <article class="command"><h3><span>04</span>windows.psscan</h3><p>Scans memory for process structures, including artifacts that may no longer be in the active list.</p><pre id="c4">vol -f "memdump.mem" windows.psscan</pre><button onclick="copyCode('c4', this)">Copy</button></article>
+    <article class="command"><h3><span>05</span>windows.cmdline</h3><p>Shows command-line arguments associated with processes.</p><pre id="c5">vol -f "memdump.mem" windows.cmdline</pre><button onclick="copyCode('c5', this)">Copy</button></article>
+    <article class="command"><h3><span>06</span>windows.netscan</h3><p>Examines memory for network connection structures.</p><pre id="c6">vol -f "memdump.mem" windows.netscan</pre><button onclick="copyCode('c6', this)">Copy</button></article>
+  </div>
+</section>
+
+<section id="processes" class="section">
+  <div class="section-head"><span>PROCESS FORENSICS</span><h2>pslist vs psscan</h2><p>The key idea behind the hidden-process scenario.</p></div>
+  <div class="compare"><article class="compare-card"><div class="icon">📋</div><h3>pslist</h3><p>Looks at Windows' active process listing.</p><strong>Think: “What's currently linked?”</strong></article><div class="versus">VS</div><article class="compare-card"><div class="icon">🔎</div><h3>psscan</h3><p>Scans memory for process structures that look like <code>_EPROCESS</code> objects.</p><strong>Think: “What process artifacts are present?”</strong></article></div>
+  <div class="warning"><span>⚠️</span><p><strong>Important:</strong> A PID found by <code>psscan</code> but not <code>pslist</code> is not automatically malware. It may be a terminated process or another artifact that needs further validation.</p></div>
+  <div class="example"><div><h3>pslist</h3><code>1000 explorer.exe</code><code>2000 chrome.exe</code><code>3000 powershell.exe</code><b>Count: 3</b></div><div><h3>psscan</h3><code>1000 explorer.exe</code><code>2000 chrome.exe</code><code>3000 powershell.exe</code><code class="mismatch">4000 cmd.exe ⚠️</code><b>Count: 4</b></div></div>
+  <div class="result">Mismatched PID: <code>4000</code> — investigate it; don't jump straight to a malicious verdict.</div>
+</section>
+
+<section class="green-section">
+  <div class="section-head"><span>CONNECT THE EVIDENCE</span><h2>One PID can lead to multiple questions</h2></div>
+  <div class="chain"><div>PID</div><span>→</span><div>Process name</div><span>→</span><div>Parent process</div><span>→</span><div>Command line</div><span>→</span><div>Network activity</div></div>
+  <p class="center-copy">For example, a process identified by <code>pslist</code> can be followed through <code>pstree</code>, <code>cmdline</code>, and network plugins to build a richer picture of system activity.</p>
+</section>
+
+<section class="section">
+  <div class="section-head"><span>ASSIGNMENT MAP</span><h2>What each scenario asks you to record</h2></div>
+  <div class="assignment-grid">
+    <article><b>Scenario 1</b><h3>Process baseline</h3><p><code>pslist</code> + <code>pstree</code>: process count, five recognizable processes, two parent-child relationships and an interpretation.</p></article>
+    <article><b>Scenario 2</b><h3>Hidden-process verification</h3><p>Compare <code>pslist</code> and <code>psscan</code>; document counts and mismatched PIDs.</p></article>
+    <article><b>Scenario 3</b><h3>Network activity</h3><p><code>netscan</code>: connections, ports, owning processes and external addresses.</p></article>
+    <article><b>Scenario 4</b><h3>Command-line trace</h3><p><code>cmdline</code>: identify an interesting command line and record it accurately.</p></article>
+    <article><b>Scenario 5</b><h3>Integrity verification</h3><p>Recalculate SHA-256 and compare it with the recorded baseline.</p></article>
+  </div>
+</section>
+
+<section id="faq" class="faq-section">
+  <div class="section-head"><span>FAQ</span><h2>Questions beginners usually ask</h2></div>
+  <div class="faq-wrap">
+    <details><summary>What is the difference between FTK Imager and Volatility?</summary><p>FTK Imager can acquire RAM for this workflow; Volatility analyzes the resulting memory image.</p></details>
+    <details><summary>Is SHA-256 encryption?</summary><p>No. SHA-256 is a cryptographic hash function that produces a fixed-size fingerprint of input data.</p></details>
+    <details><summary>Will the SHA-256 hash stay the same?</summary><p>Yes, for the exact same file contents. Change the file contents and the hash should change.</p></details>
+    <details><summary>Why can psscan return more processes than pslist?</summary><p>Because psscan scans memory for process structures, while pslist follows the active process listing. Some artifacts may remain after a process is no longer active.</p></details>
+    <details><summary>Does a mismatched PID mean malware?</summary><p>No. It is an investigation lead, not a conclusion. Validate the process with additional evidence.</p></details>
+    <details><summary>Why run windows.info first?</summary><p>It helps establish the operating-system and kernel context needed for later Windows plugins.</p></details>
+    <details><summary>What does pstree tell me?</summary><p>It helps show parent-child process relationships and process creation chains.</p></details>
+    <details><summary>What should I do if a plugin fails?</summary><p>Stop before inventing results. Diagnose the memory image, symbols, plugin compatibility and acquisition details first.</p></details>
+  </div>
+</section>
+</main>
+
+<footer><div class="footer-brand">🐼 <strong>Panda Forensics</strong><span>Learn • Practice • Investigate • Grow</span></div><div>Built with 🐼 + 🎋<br>Hosted on GitHub Pages</div><div class="scribble">Stay curious.<br>Keep investigating.</div></footer>
+<script src="script.js"></script>
+</body>
+</html>
